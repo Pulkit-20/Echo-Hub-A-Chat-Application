@@ -1,9 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
-const chatRoutes = require("./routes/chatRoutes")
+const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const connectDB = require("./config/db");
-const { notFound, errorHandler } = require("./middleware/errorMiddleware")
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 dotenv.config();
 connectDB();
@@ -17,9 +18,10 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 
-app.use(notFound)
-app.use(errorHandler)
+app.use(notFound);
+app.use(errorHandler);
 
 //using port number from .env file
 const PORT = process.env.PORT || 5000;
